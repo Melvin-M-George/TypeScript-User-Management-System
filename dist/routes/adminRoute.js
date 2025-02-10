@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
+const adminController_1 = __importDefault(require("../controllers/adminController"));
+const multer_1 = __importDefault(require("multer"));
+const multer_2 = require("../utils/multer");
+const auth_1 = __importDefault(require("../middlewares/auth"));
+const upload = (0, multer_1.default)({ storage: multer_2.storage });
+const adminRouter = express_1.default.Router();
+exports.adminRouter = adminRouter;
+adminRouter.use('/public', express_1.default.static(path_1.default.join(__dirname, '../../src/public')));
+adminRouter.get('/', adminController_1.default.getLogin);
+adminRouter.post('/', adminController_1.default.postLogin);
+adminRouter.get('/home', auth_1.default.adminAuth, adminController_1.default.loadHome);
+adminRouter.get('/logout', adminController_1.default.logout);
+adminRouter.get('/edit-user', auth_1.default.adminAuth, adminController_1.default.getEditUser);
+adminRouter.post('/edit-user', auth_1.default.adminAuth, upload.single('image'), adminController_1.default.postEditUser);
+adminRouter.get('/block-user', auth_1.default.adminAuth, adminController_1.default.blockUser);
+adminRouter.get('/unblock-user', auth_1.default.adminAuth, adminController_1.default.unBlockUser);

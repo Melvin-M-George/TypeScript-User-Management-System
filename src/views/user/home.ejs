@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --primary-dark: #357abd;
+            --secondary-color: #f5f6fa;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --background: #f5f7fa;
+            --surface: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #64748b;
+            --border-color: #e1e1e1;
+            --border-radius: 8px;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-details {
+            list-style: none;
+            padding: 0;
+        }
+
+        .user-details li {
+            margin: 0.75rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .user-details img {
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+        }
+
+        button, .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+        }
+
+        button:hover, .action-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>User Dashboard</h2>
+    </div>
+
+    <div class="container">
+        <h3>Welcome, <span id="userName"><%=user.name%></span>!</h3>
+        <ul class="user-details">
+            <li><span><img src="public/userImages/<%=user.image%>" alt="<%=user.name%>" width="100px" height="100px"></span></li>
+            <li><span>ID:</span> <span id="userId"><%=user._id%></span></li>
+            <li><span>Full Name:</span> <span id="userFullName"><%=user.name%></span></li>
+            <li><span>Email:</span> <span id="userEmail"><%=user.email%></span></li>
+            <li><span>Mobile:</span> <span id="userMobile"><%=user.mobile%></span></li>
+            <li><span>Profile Created:</span> <span id="userCreated"></span></li>
+        </ul>
+        <button onclick="location.href = '/edit-user'">Edit</button>
+        <a href="/logout" class="action-btn">Logout</a>
+    </div>
+</body>
+
+</html>

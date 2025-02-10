@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        :root {
+    --primary-color: #4a90e2;
+    --primary-dark: #357abd;
+    --secondary-color: #f5f6fa;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --background: #f5f7fa;
+    --surface: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #64748b;
+    --border-color: #e1e1e1;
+    --border-radius: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.header {
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.header button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.header button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Search Form */
+form {
+    background: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background: white;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+form button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+table th,
+table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+table th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+
+table th:last-child {
+    border-top-right-radius: var(--border-radius);
+}
+
+table tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+table tr:hover {
+    background-color: rgba(74, 144, 226, 0.05);
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 0.75rem 1.25rem;
+    margin-right: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+}
+
+.delete-btn {
+    background-color: var(--danger-color);
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.15);
+}
+
+/* User Image */
+td img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .header {
+        padding: 1rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    form {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    input[type="text"],
+    form button {
+        width: 100%;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Admin Dashboard</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container">
+        <h3>All Registered Users</h3>
+        <%if(users && users.length>0){%>
+        <table>
+            <thead>
+                <tr>
+                    <th>Profile Picture</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <form action="" method="get">
+                    <input type="text" name="q">
+                    <button type="submit">Search</button>
+                </form>
+                <%users.forEach(user=>{%>
+                    <tr>
+                        <td><img src="public/userImages/<%=user.image%>" alt="<%=user.name%>" width="100px"></td>
+                    <td><%=user.name%></td>
+                    <td><%=user.email%></td>
+                    <td><%=user.mobile%></td>
+                    <td>
+                        <button class="action-btn" onclick="window.location.href = '/admin/edit-user?userId=<%=user._id%>'">Edit</button>
+                        <%if(user.isBlocked){%>
+                            <button class="action-btn delete-btn" onclick="window.location.href = '/admin/unblock-user?userId=<%=user._id%>'">Unblock</button>
+                        <%}else{%>
+                            <button class="action-btn delete-btn" onclick="window.location.href = '/admin/block-user?userId=<%=user._id%>'">Block</button>
+                        <%}%>
+                    </td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+        <%}else{%>
+            <h3>No users yet</h3>
+        <%}%>
+    </div>
+</body>
+
+<script>
+    function logout(){
+        window.location.href = '/admin/logout'
+    }
+</script>
+
+</html>
